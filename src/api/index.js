@@ -55,3 +55,17 @@ export const userData = async (token) => {
         console.error(error);
     }
 };
+
+export const getRoutines = async () => {
+    try {
+        const response = await fetch(`${BASE_URL}/routines`, {
+            headers: {
+              'Content-Type': 'application/json',
+            }
+        })
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error(error)
+    }
+}
