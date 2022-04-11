@@ -1,7 +1,14 @@
 import React from 'react'
+import {
+  Nav
+} from "./components"
 
 function App() {
-  return <div>Welcome to Fitness Tracker</div>
+  return (
+    <>
+      <Nav />
+    </>
+  )
 }
 
 export default App
