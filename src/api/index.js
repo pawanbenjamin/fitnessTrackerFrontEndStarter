@@ -1,7 +1,20 @@
 // You can choose to import all your functions, and re-export them here
 const BASEURL = "https://fitnesstrac-kr.herokuapp.com/api";
 
-const postRegisterUser = async () => {};
+const postRegisterUser = async (username, password) => {
+  const result = await fetch(`${BASEURL}/users/register`, {
+    method: "POST",
+    headers: {
+      "content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      username,
+      password,
+    }),
+  });
+  const data = await result.json();
+  return data;
+};
 
 const postLoginUser = async () => {};
 
@@ -10,10 +23,10 @@ const getUserRoutines = async () => {};
 const getUserProfile = async () => {};
 
 const getAllActivities = async () => {
-  const result = await fetch(`${BASEURL}/activities`)
+  const result = await fetch(`${BASEURL}/activities`);
 
   const data = await result.json();
-  console.log(result)
+  console.log(result);
   return data;
 };
 
@@ -42,4 +55,5 @@ export {
   postActivities,
   patchActivities,
   getActivitiesByRoutines,
+  postRegisterUser,
 };
