@@ -9,10 +9,8 @@ export const registerUser = async (username, password) => {
                 "Content-Type": "application/json",
             },
             body: JSON.stringify({
-                user: {
-                    username,
-                    password,
-                },
+                username,
+                password,
             }),
         });
         const data = await response.json();
@@ -21,7 +19,7 @@ export const registerUser = async (username, password) => {
     } catch (error) {
         console.error(error)
     }
-    
+
 };
 
 export const loginUser = async (username, password) => {
@@ -32,10 +30,8 @@ export const loginUser = async (username, password) => {
                 "Content-Type": "application/json",
             },
             body: JSON.stringify({
-                user: {
-                    username,
-                    password,
-                },
+                username,
+                password,
             }),
         });
         const data = await response.json();
