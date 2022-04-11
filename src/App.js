@@ -1,11 +1,14 @@
 import React, { useState } from "react";
 import { Routes, Route } from "react-router-dom";
-import { Activities, Register, Login } from "./components";
+import { Activities, Register, Login, Routines } from "./components";
 
 function App() {
   const [activitiesList, setActivitiesList] = useState();
+  const [routineList, setRoutineList] = useState();
   const [username, setUsername] = useState();
   const [password, setPassword] = useState();
+  const [error, setError] = useState();
+
   return (
     <Routes>
       <Route
@@ -17,7 +20,12 @@ function App() {
           />
         }
       />
-      <Route path='/routines' element={<Activities />} />
+      <Route
+        path='/routines'
+        element={
+          <Routines routineList={routineList} setRoutineList={setRoutineList} />
+        }
+      />
       <Route path='/My-Routines' element={<Activities />} />
       <Route
         path='/login'
@@ -27,6 +35,8 @@ function App() {
             password={password}
             setUsername={setUsername}
             setPassword={setPassword}
+            error={error}
+            setError={setError}
           />
         }
       />
@@ -38,6 +48,8 @@ function App() {
             password={password}
             setUsername={setUsername}
             setPassword={setPassword}
+            error={error}
+            setError={setError}
           />
         }
       />
