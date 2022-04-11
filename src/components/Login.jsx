@@ -17,8 +17,8 @@ const Login = ({ setToken, setIsLoggedIn }) => {
             formState.username,
             formState.password
           );
-          setToken(result.data.token);
-          localStorage.setItem("token", result.data.token);
+          setToken(result.token);
+          localStorage.setItem("token", result.token);
           setIsLoggedIn(true);
         }}
       >

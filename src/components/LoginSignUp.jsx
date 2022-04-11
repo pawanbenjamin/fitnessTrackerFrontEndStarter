@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import SignUp from "./signUp";
-import Login from "./login";
+import SignUp from "./SignUp";
+import Login from "./Login";
 import { userData } from "../api";
 
 const LoginSignUp = ({ isLoggedIn, setIsLoggedIn, setToken, token }) => {
@@ -16,7 +16,7 @@ const LoginSignUp = ({ isLoggedIn, setIsLoggedIn, setToken, token }) => {
     //this one checks if you are a current user by retrieving the "token" from your local storage on your browser.
     const getUserName = async () => {
       const result = await userData(localStorage.getItem("token"));
-      setUsername(result.data.username);
+      setUsername(result.username);
     };
     getUserName();
   }, [token]);
