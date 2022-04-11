@@ -16,7 +16,20 @@ const postRegisterUser = async (username, password) => {
   return data;
 };
 
-const postLoginUser = async () => {};
+const postLoginUser = async (username, password) => {
+  const result = await fetch(`${BASEURL}/users/login`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      username,
+      password,
+    }),
+  });
+  const data = await result.json();
+  return data;
+};
 
 const getUserRoutines = async () => {};
 
@@ -56,4 +69,5 @@ export {
   patchActivities,
   getActivitiesByRoutines,
   postRegisterUser,
+  postLoginUser,
 };
