@@ -3,8 +3,8 @@ import { loginUser } from "../api";
 import { useState } from "react";
 
 
-const Login = ({ setToken, setIsloggedIn }) => {
-  const [loginState, setLoginState] = useState({
+const Login = ({ setToken, setIsLoggedIn }) => {
+  const [formState, setFormState] = useState({
     username: "",
     password: "",
   });
@@ -14,8 +14,8 @@ const Login = ({ setToken, setIsloggedIn }) => {
         onSubmit={async (e) => {
           e.preventDefault();
           const result = await loginUser(
-            loginState.username,
-            loginState.password
+            formState.username,
+            formState.password
           );
           setToken(result.data.token);
           localStorage.setItem("token", result.data.token);
@@ -23,21 +23,21 @@ const Login = ({ setToken, setIsloggedIn }) => {
         }}
       >
         <input
-          value={loginState.username}
+          value={formState.username}
           type="text"
           placeholder="username"
           required
           onChange={(e) => {
-            setLoginState({ ...loginState, username: e.target.value });
+            setFormState({ ...formState, username: e.target.value });
           }}
         />
         <input
-          value={loginState.password}
+          value={formState.password}
           type="password"
           placeholder="password"
           required
           onChange={(e) => {
-            setLoginState({ ...loginState, password: e.target.value });
+            setFormState({ ...formState, password: e.target.value });
           }}
         />
         <button type="submit">Log In</button>

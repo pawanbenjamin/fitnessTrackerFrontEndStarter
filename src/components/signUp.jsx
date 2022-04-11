@@ -1,8 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import { registerUser } from "../api";
-import { useState } from "react";
 
-const SignUp = ({ setToken, isLoggedIn, setIsloggedIn }) => {
+const SignUp = ({ setToken, setIsloggedIn }) => {
   const [formState, setFormState] = useState({
     username: "",
     password: "",
@@ -13,7 +12,7 @@ const SignUp = ({ setToken, isLoggedIn, setIsloggedIn }) => {
       <form
         onSubmit={async (e) => {
           e.preventDefault();
-          if ((formState.password = formstate.confirmPassword)) {
+          if ((formState.password = formState.confirmPassword)) {
             const result = await registerUser(
               formState.username,
               formState.password
@@ -51,7 +50,7 @@ const SignUp = ({ setToken, isLoggedIn, setIsloggedIn }) => {
             setFormState({ ...formState, confirmPassword: e.target.value });
           }}
         />
-        <button type="submit">SIGN UP!</button>
+        <button type="submit">Sign up!</button>
       </form>
     </div>
   );

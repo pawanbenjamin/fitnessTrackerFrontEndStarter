@@ -1,8 +1,7 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import SignUp from "./signUp";
 import Login from "./login";
-
-
+import { userData } from "../api";
 
 const LoginSignUp = ({ isLoggedIn, setIsLoggedIn, setToken, token }) => {
   const clearToken = () => {
@@ -38,7 +37,6 @@ const LoginSignUp = ({ isLoggedIn, setIsLoggedIn, setToken, token }) => {
           <div>
             <SignUp
               setToken={setToken}
-              isLoggedIn={isLoggedIn}
               setIsLoggedIn={setIsLoggedIn}
             />
           </div>
@@ -46,7 +44,6 @@ const LoginSignUp = ({ isLoggedIn, setIsLoggedIn, setToken, token }) => {
           <div>
             <Login
               setToken={setToken}
-              isLoggedIn={isLoggedIn}
               setIsLoggedIn={setIsLoggedIn}
             />
           </div>
@@ -56,4 +53,4 @@ const LoginSignUp = ({ isLoggedIn, setIsLoggedIn, setToken, token }) => {
   );
 };
 
-export default LoginSignUp
+export default LoginSignUp;
