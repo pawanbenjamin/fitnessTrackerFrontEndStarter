@@ -18,30 +18,26 @@ const Routines = () => {
   }, []);
   return (
     <div>
-      {allRoutines && allRoutines.length ?
-      allRoutines.map((routine, i) => {
-        //gotta map over the posts and return result to get all posts.
-        return (
-          <div key={`routine${i}`} className="routine">
-            <h1> {routine.name} </h1>
-            <h2> {routine.goal} </h2>
-            <p> by {routine.creatorName} </p>
-            <ol>
-              {routine.activities && routine.activities.length ? 
-              routine.activities.map((activity, j) => {
-                return (
-                    <li key={`activity${j}`}>{activity.name}</li>
-                );
-              })
-              : null 
-              }
-            </ol>
-            <hr></hr>
-          </div>
-        );
-      })
-    : null
-    }
+      {allRoutines && allRoutines.length
+        ? allRoutines.map((routine, i) => {
+            //gotta map over the posts and return result to get all posts.
+            return (
+              <div key={`routine${i}`} className="routine">
+                <h1> {routine.name} </h1>
+                <h2> {routine.goal} </h2>
+                <p> by {routine.creatorName} </p>
+                <ol>
+                  {routine.activities && routine.activities.length
+                    ? routine.activities.map((activity, j) => {
+                        return <li key={`activities${j}`}>{activity.name}</li>;
+                      })
+                    : null}
+                </ol>
+                <hr></hr>
+              </div>
+            );
+          })
+        : null}
     </div>
   );
 };

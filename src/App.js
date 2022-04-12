@@ -1,20 +1,15 @@
-import React from 'react'
-import { useState, useEffect } from 'react';
-import {
-  LoginSignUp,
-  Routines,
-} from "./components"
+import React from "react";
+import { useState, useEffect } from "react";
+import { LoginSignUp, Routines, Activities } from "./components";
 
 function App() {
   const [token, setToken] = useState("");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-
   useEffect(() => {
     localStorage.getItem("token") ? setIsLoggedIn(true) : null;
     setToken(localStorage.getItem("token"));
   }, [token]);
-
 
   return (
     <>
@@ -24,9 +19,10 @@ function App() {
         token={token}
         setToken={setToken}
       />
-      <Routines/>
+      <Routines />
+      <Activities />
     </>
-  )
+  );
 }
 
-export default App
+export default App;
