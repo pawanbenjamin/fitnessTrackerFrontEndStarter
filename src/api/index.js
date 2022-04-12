@@ -82,3 +82,41 @@ export const getActivities = async () => {
     throw error;
   }
 };
+
+export const getUserRoutines = async (token, username) => {
+  try {
+    const response = await fetch(`${BASE_URL}/users/${username}/routines`, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const createRoutine = async (name, goal, isPublic, token) => {
+  try {
+    const response = await fetch(`${BASE_URL}/routines`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+
+      body:
+        JSON.stringify({
+          name,
+          goal,
+          isPublic
+        })
+    });
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    throw error;
+  }
+};
