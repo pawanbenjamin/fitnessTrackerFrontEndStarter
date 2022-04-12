@@ -77,7 +77,6 @@ export const getActivities = async () => {
       },
     });
     const data = await response.json();
-    console.log(data, "This is our data for activities");
     return data;
   } catch (error) {
     throw error;

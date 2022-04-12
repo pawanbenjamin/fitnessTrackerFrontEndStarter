@@ -8,7 +8,6 @@ const Activities = () => {
     const fetchData = async () => {
       try {
         const response = await getActivities();
-        console.log(response, "This is the data for your activities");
 
         setAllActivities(response);
       } catch (error) {
