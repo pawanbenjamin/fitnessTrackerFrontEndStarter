@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { registerUser } from "../api";
 
-const SignUp = ({ setToken, setIsloggedIn }) => {
+const SignUp = ({ setToken, setIsLoggedIn }) => {
   const [formState, setFormState] = useState({
     username: "",
     password: "",
@@ -19,7 +19,7 @@ const SignUp = ({ setToken, setIsloggedIn }) => {
             );
             setToken(result.token);
             localStorage.setItem("token", result.token);
-            setIsloggedIn(true);
+            setIsLoggedIn(true);
           }
         }}
       >
@@ -56,4 +56,4 @@ const SignUp = ({ setToken, setIsloggedIn }) => {
   );
 };
 
-export default SignUp
+export default SignUp;
