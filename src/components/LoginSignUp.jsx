@@ -3,23 +3,14 @@ import SignUp from "./SignUp";
 import Login from "./Login";
 import { userData } from "../api";
 
-const LoginSignUp = ({ isLoggedIn, setIsLoggedIn, setToken, token }) => {
+const LoginSignUp = ({ isLoggedIn, setIsLoggedIn, setToken, username }) => {
   const clearToken = () => {
     //this will clear the token when you click the logout button -- see button below.
     setToken("");
     localStorage.removeItem("token");
     setIsLoggedIn(false);
   };
-  const [username, setUsername] = useState("");
-
-  useEffect(() => {
-    //this one checks if you are a current user by retrieving the "token" from your local storage on your browser.
-    const getUserName = async () => {
-      const result = await userData(localStorage.getItem("token"));
-      setUsername(result.username);
-    };
-    getUserName();
-  }, [token]);
+  
 
   return (
     //if you're logged in, this will display a "logout" button. If not, displays options to create an account or login.
