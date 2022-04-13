@@ -107,13 +107,13 @@ export const createRoutine = async (name, goal, isPublic, token) => {
         Authorization: `Bearer ${token}`,
       },
 
-      body:
-        JSON.stringify({
-          name,
-          goal,
-          isPublic
-        })
+      body: JSON.stringify({
+        name,
+        goal,
+        isPublic,
+      }),
     });
+    console.log(response, "THIS IS OUR CREATEROUTINE RESPONSE");
     const data = await response.json();
     return data;
   } catch (error) {

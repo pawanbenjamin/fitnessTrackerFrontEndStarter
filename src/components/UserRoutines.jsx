@@ -1,14 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { getUserRoutines, createRoutine } from "../api";
+import { getUserRoutines } from "../api";
+import RoutineForm from "./RoutineForm";
 
-const UserRoutines = ({ token, username }) => {
+const UserRoutines = ({ token, username, allRoutines, setAllRoutines }) => {
   const [userRoutines, setUserRoutines] = useState([]);
-  const [formState, setFormState] = useState({
-    name: "",
-    goal: "",
-    isPublic: false
-  });
 
+  const [newRoutineWanted, setNewRoutineWanted] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -20,25 +17,27 @@ const UserRoutines = ({ token, username }) => {
       }
     };
     fetchData();
-  }, [token]);
+  }, [token, username]);
 
   return (
     <div>
-      {newRoutinetWanted ? (
-          <RoutineForm
-            setNewRoutineWanted={setNewRoutineWanted}
-            token={token}
-          />
-        ) : (
-          <button
-            className="newPostButton"
-            onClick={() => {
-              setNewPostWanted(true);
-            }}
-          >
-            Create Post
-          </button>
-        )}
+      {newRoutineWanted ? (
+        <RoutineForm
+          setNewRoutineWanted={setNewRoutineWanted}
+          token={token}
+          allRoutines={allRoutines}
+          setAllRoutines={setAllRoutines}
+        />
+      ) : (
+        <button
+          className="newPostButton"
+          onClick={() => {
+            setNewRoutineWanted(true);
+          }}
+        >
+          Create Post
+        </button>
+      )}
 
       {userRoutines && userRoutines.length ? (
         userRoutines.map((routine, i) => {
