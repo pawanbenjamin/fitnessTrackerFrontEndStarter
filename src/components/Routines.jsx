@@ -1,9 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { getRoutines } from "../api";
 
-const Routines = () => {
-  const [allRoutines, setAllRoutines] = useState([]);
-
+const Routines = ({ allRoutines, setAllRoutines }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
