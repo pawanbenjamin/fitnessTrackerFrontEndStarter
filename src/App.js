@@ -13,6 +13,9 @@ import {
 function App() {
   const [token, setToken] = useState("");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [username, setUsername] = useState("");
+  const [allRoutines, setAllRoutines] = useState([]);
+  const [singleRoutineView, setSingleRoutineView] = useState(false)
 
   useEffect(() => {
     if (localStorage.getItem("token")) {
@@ -21,8 +24,8 @@ function App() {
     setToken(localStorage.getItem("token"));
   }, [token]);
 
-  const [username, setUsername] = useState("");
-  const [allRoutines, setAllRoutines] = useState([]);
+ 
+  
   useEffect(() => {
     const getUserName = async () => {
       const result = await userData(localStorage.getItem("token"));
@@ -72,6 +75,8 @@ function App() {
             <Routines
               allRoutines={allRoutines}
               setAllRoutines={setAllRoutines}
+              singleRoutineView={singleRoutineView}
+              setSingleRoutineView={setSingleRoutineView}
             />
           }
         ></Route>
