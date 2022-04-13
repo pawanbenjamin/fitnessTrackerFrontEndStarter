@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { getUserRoutines, updateRoutine } from "../api";
+import { getUserRoutines } from "../api";
 import RoutineForm from "./RoutineForm";
+import EditRoutineForm from "./EditRoutineForm";
 
 const UserRoutines = ({ token, username, allRoutines, setAllRoutines }) => {
   const [userRoutines, setUserRoutines] = useState([]);
-  const [formState, setFormState] = useState(false);
-  const [changedRoutine, setChangedRoutine] = useState(false);
-
+  const [editRoutineWanted, setEditRoutineWanted] = useState(false);
   const [newRoutineWanted, setNewRoutineWanted] = useState(false);
 
   useEffect(() => {
@@ -57,58 +56,24 @@ const UserRoutines = ({ token, username, allRoutines, setAllRoutines }) => {
                     })
                   : null}
               </ol>
-              <form
-                className="updateRoutine"
-                onSubmit={async (e) => {
-                  e.preventDefault();
-                  const updatedRoutine = await updateRoutine(
-                    formState.name,
-                    formState.goal,
-                    formState.isPublic,
-                    token
-                  );
-                  setAllRoutines([...allRoutines, updatedRoutine]);
-                  setChangedRoutine(false);
-                }}
-              >
-                <div className="createName">Update your routines!</div>
-                <input
-                  className="name"
-                  type="text"
-                  value={formState.name}
-                  placeholder="name"
-                  required
-                  onChange={(e) => {
-                    setFormState({ ...formState, name: e.target.value });
-                  }}
+              {editRoutineWanted ? (
+                <EditRoutineForm
+                  setEditRoutineWanted={setEditRoutineWanted}
+                  token={token}
+                  allRoutines={allRoutines}
+                  setAllRoutines={setAllRoutines}
                 />
-                <input
-                  className="goal"
-                  type="text"
-                  value={formState.goal}
-                  placeholder="goal"
-                  required
-                  onChange={(e) => {
-                    setFormState({ ...formState, goal: e.target.value });
+              ) : (
+                <button
+                  className="updateRoutineButton"
+                  onClick={() => {
+                    setEditRoutineWanted(true);
                   }}
-                />
-                <input
-                  className="isPublic"
-                  type="checkbox"
-                  value={formState.isPublic}
-                  placeholder="isPublic"
-                  onChange={() => {
-                    setFormState({
-                      ...formState,
-                      isPublic: !formState.isPublic,
-                    });
-                  }}
-                />
-
-                <button className="updateButton" type="submit">
-                  Update Routine
+                >
+                  Edit
                 </button>
-              </form>
+              )}
+
               <hr></hr>
             </div>
           );

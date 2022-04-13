@@ -97,7 +97,6 @@ export const getUserRoutines = async (token, username) => {
     throw error;
   }
 };
-
 export const createRoutine = async (name, goal, isPublic, token) => {
   try {
     const response = await fetch(`${BASE_URL}/routines`, {

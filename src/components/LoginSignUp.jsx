@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import SignUp from "./SignUp";
 import Login from "./Login";
-import { userData } from "../api";
+
 
 const LoginSignUp = ({ isLoggedIn, setIsLoggedIn, setToken, username }) => {
   const clearToken = () => {

@@ -1,7 +1,13 @@
 import React, { useEffect } from "react";
 import { getRoutines } from "../api";
+import SingleRoutine from "./SingleRoutine"
 
-const Routines = ({ allRoutines, setAllRoutines }) => {
+const Routines = ({
+  allRoutines,
+  setAllRoutines,
+  singleRoutineView,
+  setSingleRoutineView,
+}) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -13,25 +19,19 @@ const Routines = ({ allRoutines, setAllRoutines }) => {
       }
     };
     fetchData();
-  }, []);
+  }, [setAllRoutines]);
   return (
     <div>
       {allRoutines && allRoutines.length
         ? allRoutines.map((routine, i) => {
-            //gotta map over the posts and return result to get all posts.
+            //gotta map over the Routines and return result to get all Routines.
             return (
               <div key={`routine${i}`} className="routine">
-                <h1> {routine.name} </h1>
-                <h2> {routine.goal} </h2>
-                <p> by {routine.creatorName} </p>
-                <ol>
-                  {routine.activities && routine.activities.length
-                    ? routine.activities.map((activity, j) => {
-                        return <li key={`activities${j}`}>{activity.name}</li>;
-                      })
-                    : null}
-                </ol>
-                <hr></hr>
+                <SingleRoutine 
+                  routine={routine}
+                  singleRoutineView={singleRoutineView}
+                  setSingleRoutineView={setSingleRoutineView}
+                />
               </div>
             );
           })
