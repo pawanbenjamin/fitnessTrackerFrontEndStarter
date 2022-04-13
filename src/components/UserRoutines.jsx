@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { getUserRoutines } from "../api";
+import { getUserRoutines, updateRoutine } from "../api";
 import RoutineForm from "./RoutineForm";
 
 const UserRoutines = ({ token, username, allRoutines, setAllRoutines }) => {
   const [userRoutines, setUserRoutines] = useState([]);
+  const [formState, setFormState] = useState(false);
+  const [changedRoutine, setChangedRoutine] = useState(false);
 
   const [newRoutineWanted, setNewRoutineWanted] = useState(false);
 
@@ -35,13 +37,12 @@ const UserRoutines = ({ token, username, allRoutines, setAllRoutines }) => {
             setNewRoutineWanted(true);
           }}
         >
-          Create Post
+          Create Routine
         </button>
       )}
 
       {userRoutines && userRoutines.length ? (
         userRoutines.map((routine, i) => {
-          //gotta map over the posts and return result to get all posts.
           return (
             <div key={`userRoutine${i}`} className="userRoutines">
               <h1> {routine.name} </h1>
@@ -56,6 +57,58 @@ const UserRoutines = ({ token, username, allRoutines, setAllRoutines }) => {
                     })
                   : null}
               </ol>
+              <form
+                className="updateRoutine"
+                onSubmit={async (e) => {
+                  e.preventDefault();
+                  const updatedRoutine = await updateRoutine(
+                    formState.name,
+                    formState.goal,
+                    formState.isPublic,
+                    token
+                  );
+                  setAllRoutines([...allRoutines, updatedRoutine]);
+                  setChangedRoutine(false);
+                }}
+              >
+                <div className="createName">Update your routines!</div>
+                <input
+                  className="name"
+                  type="text"
+                  value={formState.name}
+                  placeholder="name"
+                  required
+                  onChange={(e) => {
+                    setFormState({ ...formState, name: e.target.value });
+                  }}
+                />
+                <input
+                  className="goal"
+                  type="text"
+                  value={formState.goal}
+                  placeholder="goal"
+                  required
+                  onChange={(e) => {
+                    setFormState({ ...formState, goal: e.target.value });
+                  }}
+                />
+                <input
+                  className="isPublic"
+                  type="checkbox"
+                  value={formState.isPublic}
+                  placeholder="isPublic"
+                  onChange={() => {
+                    setFormState({
+                      ...formState,
+                      isPublic: !formState.isPublic,
+                    });
+                  }}
+                />
+
+                <button className="updateButton" type="submit">
+                  Update Routine
+                </button>
+              </form>
               <hr></hr>
             </div>
           );
@@ -68,3 +121,29 @@ const UserRoutines = ({ token, username, allRoutines, setAllRoutines }) => {
 };
 
 export default UserRoutines;
+
+/* 
+{msgBox.yes ? (
+              msgBox.idx == i ? (
+                <Message post={post} setMsgBox={setMsgBox} />
+              ) : (
+                <button
+                  className="msgButton1"
+                  onClick={() => {
+                    setMsgBox({ ...msgBox, idx: i });
+                  }}
+                >
+                  Send Message
+                </button>
+              )
+            ) : (
+              <button
+                className="msgButton2"
+                onClick={() => {
+                  setMsgBox({ ...msgBox, idx: i });
+                }}
+              >
+                Create Message
+              </button>
+            )}
+*/
