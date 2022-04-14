@@ -1,33 +1,32 @@
 import React from "react";
 import { Link, useParams } from "react-router-dom";
 
-const SingleRoutine = ({
-  allRoutines,
-  routine,
-  singleRoutineView,
-  setSingleRoutineView,
-}) => {
+const SingleRoutine = ({ allRoutines, routine }) => {
   const { singleRoutineId } = useParams();
-  //   console.log(typeof singleRoutineId, "asdfas");
 
   let routineToRender = null;
 
   if (singleRoutineId) {
     const singleRoutine = allRoutines.find(
-      (element) => singleRoutineId == element.id
+      (element) => +singleRoutineId === +element.id
     );
     routineToRender = singleRoutine;
   } else {
     routineToRender = routine;
   }
-  console.log(routineToRender);
+  console.log(routineToRender, "ROUTINE TO RENDER");
+  console.log(routineToRender.id, "ROUTINE TO RENDER ID");
   return (
     <>
       {routineToRender && routineToRender.id ? (
         <>
-          <Link to={`/routines/${routineToRender.id}`}>
-            <h1> {routineToRender.name} </h1>
-          </Link>
+          {routineToRender.isPublic ? (
+            <Link to={`/routines/${routineToRender.id}`}>
+              <h1> {routineToRender.name} </h1>
+            </Link>
+          ) : (
+            <h1>{routineToRender.name}</h1>
+          )}
 
           <h2> {routineToRender.goal} </h2>
           <p> by {routineToRender.creatorName} </p>
