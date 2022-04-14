@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { getUserRoutines } from "../api";
 import RoutineForm from "./RoutineForm";
-import EditRoutineForm from "./EditRoutineForm";
 import SingleRoutine from "./SingleRoutine";
 
 const UserRoutines = ({ token, username, allRoutines, setAllRoutines }) => {
   const [userRoutines, setUserRoutines] = useState([]);
-  const [editRoutineWanted, setEditRoutineWanted] = useState(false);
+
   const [newRoutineWanted, setNewRoutineWanted] = useState(false);
 
   useEffect(() => {
@@ -46,28 +45,15 @@ const UserRoutines = ({ token, username, allRoutines, setAllRoutines }) => {
           return (
             <>
               <div key={`userRoutine${i}`} className="userRoutine">
-                <SingleRoutine allRoutines={allRoutines} routine={routine} />
-              </div>
-              <div key={`editRoutine${i}`} className="editRoutine">
-                {editRoutineWanted ? (
-                  <EditRoutineForm
-                    setEditRoutineWanted={setEditRoutineWanted}
-                    token={token}
-                    allRoutines={allRoutines}
-                    setAllRoutines={setAllRoutines}
-                  />
-                ) : (
-                  <button
-                    className="updateRoutineButton"
-                    onClick={() => {
-                      setEditRoutineWanted(true);
-                    }}
-                  >
-                    Edit
-                  </button>
-                )}
-
-                <hr></hr>
+                <SingleRoutine
+                  allRoutines={allRoutines}
+                  routine={routine}
+                  username={username}
+                  setAllRoutines={setAllRoutines}
+                  token={token}
+                  setUserRoutines={setUserRoutines}
+                  userRoutines={userRoutines}
+                />
               </div>
             </>
           );

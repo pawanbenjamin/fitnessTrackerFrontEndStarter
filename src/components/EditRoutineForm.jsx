@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+
 import { updateRoutine } from "../api";
 
 const EditRoutineForm = ({
@@ -6,27 +7,38 @@ const EditRoutineForm = ({
   token,
   allRoutines,
   setAllRoutines,
+  routineToRender,
+  setUserRoutines,
+  userRoutines,
 }) => {
   const [formState, setFormState] = useState({
-    routineId: "",
     name: "",
     goal: "",
     isPublic: false,
   });
+
   return (
     <form
       className="updateRoutine"
       onSubmit={async (e) => {
         e.preventDefault();
         const updatedRoutine = await updateRoutine(
-          formState.routineId,
+          token,
+          routineToRender.id,
           formState.name,
           formState.goal,
-          formState.isPublic,
-          token
+          formState.isPublic
         );
         console.log(updatedRoutine);
-        setAllRoutines([...allRoutines, updatedRoutine]);
+        // setAllRoutines([...allRoutines, updatedRoutine]);
+        const updatedRoutines = userRoutines.map((routine) => {
+          if (routine.id === updatedRoutine.id) {
+            return updatedRoutine;
+          } else {
+            return routine;
+          }
+        });
+        setUserRoutines(updatedRoutines);
         setEditRoutineWanted(false);
       }}
     >

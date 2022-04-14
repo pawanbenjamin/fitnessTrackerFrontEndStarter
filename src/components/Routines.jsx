@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { getRoutines } from "../api";
 import SingleRoutine from "./SingleRoutine";
 
-const Routines = ({ allRoutines, setAllRoutines }) => {
+const Routines = ({ allRoutines, setAllRoutines, username, token }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -22,7 +22,13 @@ const Routines = ({ allRoutines, setAllRoutines }) => {
             //gotta map over the Routines and return result to get all Routines.
             return (
               <div key={`routine${i}`} className="routine">
-                <SingleRoutine allRoutines={allRoutines} routine={routine} />
+                <SingleRoutine
+                  allRoutines={allRoutines}
+                  routine={routine}
+                  username={username}
+                  setAllRoutines={setAllRoutines}
+                  token={token}
+                />
               </div>
             );
           })

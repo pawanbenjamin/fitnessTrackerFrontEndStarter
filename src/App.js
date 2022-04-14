@@ -16,7 +16,6 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [username, setUsername] = useState("");
   const [allRoutines, setAllRoutines] = useState([]);
-  const [singleRoutineView, setSingleRoutineView] = useState(false);
 
   useEffect(() => {
     if (localStorage.getItem("token")) {
@@ -70,7 +69,14 @@ function App() {
         ></Route>
         <Route
           path="/routines/:singleRoutineId"
-          element={<SingleRoutine allRoutines={allRoutines} />}
+          element={
+            <SingleRoutine
+              allRoutines={allRoutines}
+              username={username}
+              setAllRoutines={setAllRoutines}
+              token={token}
+            />
+          }
         ></Route>
         <Route
           path="/routines"
@@ -78,8 +84,7 @@ function App() {
             <Routines
               allRoutines={allRoutines}
               setAllRoutines={setAllRoutines}
-              singleRoutineView={singleRoutineView}
-              setSingleRoutineView={setSingleRoutineView}
+              username={username}
             />
           }
         ></Route>
