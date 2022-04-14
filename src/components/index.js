@@ -4,4 +4,5 @@ export { default as Routines } from "./Routines";
 export { default as Activities } from "./Activities";
 export { default as Home } from "./Home"
 export { default as UserRoutines } from "./UserRoutines"
+export { default as SingleRoutine } from "./SingleRoutine"
 // export { default as Login } from './Login';

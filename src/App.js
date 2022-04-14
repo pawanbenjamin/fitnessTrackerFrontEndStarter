@@ -8,6 +8,7 @@ import {
   Routines,
   Activities,
   UserRoutines,
+  SingleRoutine
 } from "./components";
 
 function App() {
@@ -24,8 +25,8 @@ function App() {
     setToken(localStorage.getItem("token"));
   }, [token]);
 
- 
-  
+
+
   useEffect(() => {
     const getUserName = async () => {
       const result = await userData(localStorage.getItem("token"));
@@ -69,6 +70,9 @@ function App() {
             />
           }
         ></Route>
+        <Route 
+          path="/routines/:singleRoutineId"
+          element={<SingleRoutine allRoutines={allRoutines} />}></Route>
         <Route
           path="/routines"
           element={

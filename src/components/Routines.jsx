@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { getRoutines } from "../api";
-import SingleRoutine from "./SingleRoutine"
+import SingleRoutine from "./SingleRoutine";
 
 const Routines = ({
   allRoutines,
@@ -27,7 +27,8 @@ const Routines = ({
             //gotta map over the Routines and return result to get all Routines.
             return (
               <div key={`routine${i}`} className="routine">
-                <SingleRoutine 
+                <SingleRoutine
+                  allRoutines={allRoutines}
                   routine={routine}
                   singleRoutineView={singleRoutineView}
                   setSingleRoutineView={setSingleRoutineView}
