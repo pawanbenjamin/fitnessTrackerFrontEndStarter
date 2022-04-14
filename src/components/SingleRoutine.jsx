@@ -1,9 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link, useParams } from "react-router-dom";
+import EditRoutineForm from "./EditRoutineForm";
 
-const SingleRoutine = ({ allRoutines, routine }) => {
+const SingleRoutine = ({
+  allRoutines,
+  routine,
+  username,
+  token,
+  setAllRoutines,
+  setUserRoutines,
+  userRoutines,
+}) => {
   const { singleRoutineId } = useParams();
-
+  const [editRoutineWanted, setEditRoutineWanted] = useState(false);
   let routineToRender = null;
 
   if (singleRoutineId) {
@@ -38,6 +47,32 @@ const SingleRoutine = ({ allRoutines, routine }) => {
               : null}
           </ol>
           <hr></hr>
+          {routineToRender.creatorName === username ? (
+            <div className="editRoutine">
+              {editRoutineWanted ? (
+                <EditRoutineForm
+                  setEditRoutineWanted={setEditRoutineWanted}
+                  token={token}
+                  allRoutines={allRoutines}
+                  setAllRoutines={setAllRoutines}
+                  routineToRender={routineToRender}
+                  setUserRoutines={setUserRoutines}
+                  userRoutines={userRoutines}
+                />
+              ) : (
+                <button
+                  className="updateRoutineButton"
+                  onClick={() => {
+                    setEditRoutineWanted(true);
+                  }}
+                >
+                  Edit
+                </button>
+              )}
+
+              <hr></hr>
+            </div>
+          ) : null}
         </>
       ) : null}
     </>

@@ -120,7 +120,7 @@ export const createRoutine = async (name, goal, isPublic, token) => {
   }
 };
 
-export const updateRoutine = async (routineId, name, goal, isPublic, token) => {
+export const updateRoutine = async (token, routineId, name, goal, isPublic) => {
   try {
     const response = await fetch(`${BASE_URL}/routines/${routineId}`, {
       method: "PATCH",
@@ -134,6 +134,7 @@ export const updateRoutine = async (routineId, name, goal, isPublic, token) => {
         isPublic,
       }),
     });
+    console.log(response, "this is our data");
     const data = await response.json();
     return data;
   } catch (error) {
