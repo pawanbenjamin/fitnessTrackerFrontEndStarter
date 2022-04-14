@@ -8,6 +8,7 @@ const EditRoutineForm = ({
   setAllRoutines,
 }) => {
   const [formState, setFormState] = useState({
+    routineId: "",
     name: "",
     goal: "",
     isPublic: false,
@@ -18,13 +19,13 @@ const EditRoutineForm = ({
       onSubmit={async (e) => {
         e.preventDefault();
         const updatedRoutine = await updateRoutine(
-        //   routineId,
+          formState.routineId,
           formState.name,
           formState.goal,
           formState.isPublic,
           token
         );
-        console.log(updatedRoutine)
+        console.log(updatedRoutine);
         setAllRoutines([...allRoutines, updatedRoutine]);
         setEditRoutineWanted(false);
       }}
